@@ -14,7 +14,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-
+Route::group(['middleware'=>"auth:sanctum"],function(){
 
 Route::get('student',[StudentController::class,'getstudent']);
 
@@ -25,6 +25,11 @@ Route::delete('deletedata/{id}',[DataController::class,'deletedata']);
 Route::get('searchdata/{name}',[DataController::class,'searchdata']);
 
 Route::resource('member',MemberController::class);
+
+});
+
+
+
 
 
 Route::post('login',[UserAuthController::class,'login']);
